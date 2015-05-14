@@ -1,0 +1,264 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>read_c3d_session</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-12-02"><meta name="DC.source" content="read_c3d_session.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#3">READ_C3D_SESSION</a></li></ul></div><pre class="codeinput"><span class="keyword">function</span> [session,c3d_config] = read_c3d_session(c3d_config)
+</pre><pre class="codeinput"><span class="comment">%</span>
+</pre><h2>READ_C3D_SESSION<a name="3"></a></h2><p>session = read_c3d_session(fullpath,itf) EXAMPLE session = read_c3d_session('C:\working_dir\') session = read_c3d_trial('C:\working_dir\',itf)</p><p>Read all c3d trial in working_dir path INPUT fullpath : is the fullpath of c3d file OPTIONAL itf: server object created using c3dserver or btkEmulateC3Dserver()</p><p>OUTPUT session is the session structure (see manual ) a collection of c3d structure and some more info</p><p>Copyright (c) 2014, Marco Jacono, Alberto Inuggi, Claudio Campus All rights reserved.</p><p>BSD LICENSE Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p><p>1. Redistributions of source code must retain the above copyright notice,    this list of conditions and the following disclaimer.</p><p>2. Redistributions in binary form must reproduce the above copyright notice,    this list of conditions and the following disclaimer in the documentation    and/or other materials provided with the distribution.</p><p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p><pre class="codeinput"><span class="comment">% if nargin &lt; 1 || nargin &gt; 3</span>
+<span class="comment">%     help read_c3d_session</span>
+<span class="comment">%     error('c3dToolbox:WrongNumberInput','Function require 1 or 2 input -&gt; full pathname and/or c3dserver object\n')</span>
+<span class="comment">% end</span>
+<span class="comment">%</span>
+<span class="comment">% if not(ischar(varargin{1}))</span>
+<span class="comment">%     error('c3dToolbox:WrongTypeInput','Pathname must be a char array\n')</span>
+<span class="comment">% end</span>
+<span class="comment">%</span>
+<span class="comment">% if not(exist(varargin{1},'dir') )</span>
+<span class="comment">%     error('c3dToolbox:FileNotFound','Check input path, directory was not found\n')</span>
+<span class="comment">% end</span>
+<span class="comment">%</span>
+<span class="comment">% if nargin == 2</span>
+<span class="comment">%     % verifico se c3d server &egrave; coerente</span>
+<span class="comment">%     if not(xor(isa(varargin{2},'COM.C3DServer_C3D') ,isstruct(varargin{2})))</span>
+<span class="comment">%         error('c3dToolbox:C3Dserverfail','C3D server not valid object\n')</span>
+<span class="comment">%     end</span>
+<span class="comment">%     itf = varargin{2};</span>
+<span class="comment">% end</span>
+<span class="comment">%</span>
+<span class="comment">% if nargin == 1</span>
+<span class="comment">%     % Retrive PC and MATLAB info to properly setup the C3D COM Object.</span>
+<span class="comment">%     [os_ver, os_bit, matlab_ver, matlab_bit, matlab_tlbx] = get_pc_settings();</span>
+<span class="comment">%     if strcmp(os_ver, 'Win') &amp;&amp; strcmp(os_bit, '32')</span>
+<span class="comment">%         clc</span>
+<span class="comment">%         disp('c3dserver loaded')</span>
+<span class="comment">%         itf = c3dserver;</span>
+<span class="comment">%     else</span>
+<span class="comment">%         itf = btkEmulateC3Dserver();</span>
+<span class="comment">%         disp('btkEmulate loaded')</span>
+<span class="comment">%     end</span>
+<span class="comment">% end</span>
+
+session_path            = c3d_config.path.session;
+itf                     = c3d_config.itf;
+file_list               = dir(session_path);
+fprintf(<span class="string">'Processing folder: %s\n'</span>, session_path);
+
+<span class="comment">% Eseguo ciclo sull'intera lunghezza di file_list, solo alcuni saranno c3d</span>
+trial = 0;
+clc
+fprintf(<span class="string">'Building struct\n'</span>,trial)
+<span class="keyword">for</span> file_id = 1:length(file_list )
+    [PATHSTR,NAME,EXT] = fileparts(file_list(file_id).name);
+    <span class="comment">% Se l'estensione &egrave; C3D</span>
+    <span class="keyword">if</span> strcmp(EXT,<span class="string">'.c3d'</span>)
+        trial = trial + 1;
+        <span class="comment">% Estraggo dal file_name qualsiasi cosa sia un numero uso la</span>
+        <span class="comment">% variabile NAME che non contiene l'estensione</span>
+        [session{trial},c3d_config] = read_c3d_trial(fullfile(session_path,file_list(file_id).name),itf,c3d_config);
+        fprintf(<span class="string">'.%04d'</span>,trial)
+        <span class="keyword">if</span> rem(trial,10)==0
+            fprintf(<span class="string">'\n'</span>);
+        <span class="keyword">end</span>
+        session{trial}.info.trial_id       = str2num(NAME((double(NAME) &gt;= 48) &amp; (double(NAME) &lt;= 56)));
+        session{trial}.info.nSamples = session{trial}.info.HEADER.nEndFrame-session{trial}.info.HEADER.nStartFrame + 1;
+        fRate = session{trial}.info.HEADER.fRate;
+        <span class="keyword">if</span> session{trial}.info.HEADER.nPoints &gt; 0
+            session{trial}.info.Tmax = session{trial}.info.nSamples/fRate;
+            session{trial}.info.time = linspace(0,session{trial}.info.Tmax,session{trial}.info.nSamples);
+        <span class="keyword">end</span>
+        <span class="keyword">if</span> session{trial}.info.HEADER.nAnalog &gt; 0 <span class="comment">% Esistono canali analogici</span>
+            aRate = session{trial}.info.ANALOG.RATE{:};
+            session{trial}.info.time_analog = linspace(0,session{trial}.info.Tmax,round(session{trial}.info.nSamples*aRate/fRate));
+        <span class="keyword">end</span>
+
+
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+c3d_config.Max_trial = trial;
+fprintf(<span class="string">'\nc3d_config updated\n'</span>)
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function [session,c3d_config] = read_c3d_session(c3d_config)
+%
+%% READ_C3D_SESSION
+% 
+% 
+% session = read_c3d_session(fullpath,itf)
+% EXAMPLE
+% session = read_c3d_session('C:\working_dir\')
+% session = read_c3d_trial('C:\working_dir\',itf)
+%
+% Read all c3d trial in working_dir path
+% INPUT
+% fullpath : is the fullpath of c3d file
+% OPTIONAL
+% itf: server object created using c3dserver or btkEmulateC3Dserver()
+%
+% OUTPUT
+% session is the session structure (see manual ) a collection of c3d
+% structure and some more info
+%
+%
+% Copyright (c) 2014, Marco Jacono, Alberto Inuggi, Claudio Campus
+% All rights reserved.
+%
+% BSD LICENSE
+% Redistribution and use in source and binary forms, with or without modification,
+% are permitted provided that the following conditions are met:
+%
+% 1. Redistributions of source code must retain the above copyright notice,
+%    this list of conditions and the following disclaimer.
+%
+% 2. Redistributions in binary form must reproduce the above copyright notice,
+%    this list of conditions and the following disclaimer in the documentation
+%    and/or other materials provided with the distribution.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+% IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+% THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+% ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+% LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+% DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+% ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
+% (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF 
+% THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+% if nargin < 1 || nargin > 3
+%     help read_c3d_session
+%     error('c3dToolbox:WrongNumberInput','Function require 1 or 2 input -> full pathname and/or c3dserver object\n')
+% end
+%
+% if not(ischar(varargin{1}))
+%     error('c3dToolbox:WrongTypeInput','Pathname must be a char array\n')
+% end
+%
+% if not(exist(varargin{1},'dir') )
+%     error('c3dToolbox:FileNotFound','Check input path, directory was not found\n')
+% end
+%
+% if nargin == 2
+%     % verifico se c3d server è coerente
+%     if not(xor(isa(varargin{2},'COM.C3DServer_C3D') ,isstruct(varargin{2})))
+%         error('c3dToolbox:C3Dserverfail','C3D server not valid object\n')
+%     end
+%     itf = varargin{2};
+% end
+%
+% if nargin == 1
+%     % Retrive PC and MATLAB info to properly setup the C3D COM Object.
+%     [os_ver, os_bit, matlab_ver, matlab_bit, matlab_tlbx] = get_pc_settings();
+%     if strcmp(os_ver, 'Win') && strcmp(os_bit, '32')
+%         clc
+%         disp('c3dserver loaded')
+%         itf = c3dserver;
+%     else
+%         itf = btkEmulateC3Dserver();
+%         disp('btkEmulate loaded')
+%     end
+% end
+
+session_path            = c3d_config.path.session;
+itf                     = c3d_config.itf;
+file_list               = dir(session_path);
+fprintf('Processing folder: %s\n', session_path);
+
+% Eseguo ciclo sull'intera lunghezza di file_list, solo alcuni saranno c3d
+trial = 0;
+clc
+fprintf('Building struct\n',trial)
+for file_id = 1:length(file_list )
+    [PATHSTR,NAME,EXT] = fileparts(file_list(file_id).name);
+    % Se l'estensione è C3D
+    if strcmp(EXT,'.c3d')
+        trial = trial + 1;
+        % Estraggo dal file_name qualsiasi cosa sia un numero uso la
+        % variabile NAME che non contiene l'estensione
+        [session{trial},c3d_config] = read_c3d_trial(fullfile(session_path,file_list(file_id).name),itf,c3d_config);
+        fprintf('.%04d',trial)
+        if rem(trial,10)==0
+            fprintf('\n');
+        end
+        session{trial}.info.trial_id       = str2num(NAME((double(NAME) >= 48) & (double(NAME) <= 56)));
+        session{trial}.info.nSamples = session{trial}.info.HEADER.nEndFrame-session{trial}.info.HEADER.nStartFrame + 1;
+        fRate = session{trial}.info.HEADER.fRate;
+        if session{trial}.info.HEADER.nPoints > 0
+            session{trial}.info.Tmax = session{trial}.info.nSamples/fRate;
+            session{trial}.info.time = linspace(0,session{trial}.info.Tmax,session{trial}.info.nSamples);
+        end
+        if session{trial}.info.HEADER.nAnalog > 0 % Esistono canali analogici
+            aRate = session{trial}.info.ANALOG.RATE{:};
+            session{trial}.info.time_analog = linspace(0,session{trial}.info.Tmax,round(session{trial}.info.nSamples*aRate/fRate));
+        end
+        
+        
+    end
+end
+c3d_config.Max_trial = trial;
+fprintf('\nc3d_config updated\n')
+##### SOURCE END #####
+--></body></html>
